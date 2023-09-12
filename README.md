@@ -3,9 +3,8 @@
 
 This cloud-native web application is built using a mix of technologies. It's designed to be accessible to users via the internet, allowing them to vote for their preferred programming language out of six choices: C#, Python, JavaScript, Go, Java, and NodeJS.
 
+#Technical Stack
 
-
-Technical Stack
 Frontend: The frontend of this application is built using React and JavaScript. It provides a responsive and user-friendly interface for casting votes.
 
 Backend and API: The backend of this application is powered by Go (Golang). It serves as the API handling user voting requests. MongoDB is used as the database backend, configured with a replica set for data redundancy and high availability.
@@ -25,7 +24,7 @@ StatefulSet: For components requiring statefulness, such as the MongoDB replica 
 
 PersistentVolume and PersistentVolumeClaim: These Kubernetes resources manage the storage required for the application, ensuring data persistence and scalability.
 
-# PROJECT BRIEF
+Learning Opportunities
 Creating and deploying this cloud-native web voting application with Kubernetes offers a valuable learning experience. Here are some key takeaways:
 
 Containerization: Gain hands-on experience with containerization technologies like Docker for packaging applications and their dependencies.
@@ -41,10 +40,10 @@ Security and Secrets Management: Learn best practices for securing sensitive inf
 Stateful Applications: Gain insights into the nuances of deploying stateful applications within a container orchestration environment.
 
 Persistent Storage: Understand how Kubernetes manages and provisions persistent storage for applications with state.
+
 Create EKS cluster with NodeGroup (2 nodes of t2.medium instance type) Create EC2 Instance t2.micro (Optional)
 
 ##IAM role for ec2
-
 {
 	"Version": "2012-10-17",
 	"Statement": [{
@@ -77,16 +76,6 @@ aws eks update-kubeconfig --name EKS_CLUSTER_NAME --region us-west-2
 To check the nodes in your cluster run
 
 kubectl get nodes
-If using EC2 and getting the "You must be logged in to the server (Unauthorized)" error, refer this: https://repost.aws/knowledge-center/eks-api-server-unauthorized-error
-
-Clone the github repo
-
-git clone https://github.com/N4si/K8s-voting-app.git
-Create CloudChamp Namespace
-
-kubectl create ns cloudchamp
-
-kubectl config set-context --current --namespace cloudchamp
 MONGO Database Setup
 
 To create Mongo statefulset with Persistent volumes, run the command in manifests folder:
@@ -101,7 +90,6 @@ kubectl run --rm utils -it --image praqma/network-multitool -- bash
 Within the new utils pod shell, execute the following DNS queries:
 
 for i in {0..2}; do nslookup mongo-$i.mongo; done
-Note: This confirms that the DNS records have been created successfully and can be resolved within the cluster, 1 per MongoDB pod that exists behind the Headless Service - earlier created.
 
 Exit the utils container
 
